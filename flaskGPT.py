@@ -1,16 +1,60 @@
 from flask import Flask, request
 import openai
 
-openai.api_key = "YOUR_OPENAI_API_KEY"
+# use latest version of flask or at least 2.2.3: pip install --upgrade flask
+
+openai.api_key = ""
 
 roles = [
     'Alice | character from Alice in Wonderland from Lewis Carol',
     'Bob | character from Fight Club named Robert Paulsen',
-    'Charlie | character from Charlie and the chocolate factory from Roald Dahl',
+    'Charles Darwin | Naturalist known for the theory of evolution',
     'Dan | do anything now',
     'Eva | neon genesis evangelion`s angel',
-    'Frank | User`s bestfriend and he cannot lie to User'
+    'Frank | User`s bestfriend and he cannot lie to User',
+    'Gregory | you are the main character of the medical drama series House',    
+    'Herbert George Wells | an English writer',
+    'Isaac Newton | Pioneering physicist and mathematician',
+    'Jeremy | a smart engineer in FPGA',
+    'Karl Marx | Philosopher, economist, and revolutionary socialist',
+    'Leonardo Da Vinci | a polymath of the Italian Renaissance, active painter, draughtsman, engineer, scientist, theorist, sculptor and architect',
+    'Michael | CEO of Microstrategy and bitcoin maximalist',
+    'Nelson Mandela | South African anti-apartheid leader and president',
+    'Oliver | IT Operation Administrator in the greatest Financial company of the world',
+    'Pablo Picasso | Influential painter and sculptor',
+#    'Quentin',
+    'Richard Dawkins | a British evolutionary biologist and author of the Selfish Gene',
+    'Shiva | one of the principal deities of Hinduism, also known as The Destroyer',
+    'Ted | IT Support Technician in the greatest Financial company of the world',
+#    'Ursula',
+    'Vincent van Gogh | Post-Impressionist painter',
+    'William | founder of Microsoft and Bill & Melinda Gates Foundation',
+#    'Xavier',
+    'Yuri | the first human to journey into outer space',
+    'Zack | main singer of the rock band rage against the machine'
     ]
+
+#roles = [
+#    'Yoda | character from Star Wars movies',
+#    'Gollum | character from Lord of the Rings movies',
+#    'Donald Trump | former US president and billionaire',
+#    'Joe Rogan | famous comedian and talkmaster',
+#    'Asia | User`s daughter and she loves User',
+#    'Colin | User`s boyfriend and he loves User',
+#    'Izabela | User`s girlfriend and she loves User'
+#    ]
+
+# OTHER ROLES: https://en.wikipedia.org/wiki/Alice_and_Bob
+#roles = [
+#    'Alice | ',
+#    'Bob | ',
+#    'Charlie | ',
+#    'Dan | ',
+#    'Eve | ',
+#    'Frank | ',
+#    'Gisele | '
+#    ]
+
 
 app = Flask(__name__)
 
@@ -75,10 +119,10 @@ def home():
 
 
         return f'''
-                <form method="POST">
-                    <label>Enter some text:</label><br>
-                    <textarea id="text_input" name="text_input" rows="5" cols="50"></textarea><br>
-                    <label>Select an option:</label><br>
+                <center><table border=0 bgcolor=#111><tr><td style=#AAA align=center><font face="Consolas" color=#AAA><form method="POST">
+                    <label>ENTER YOUR PROMPT</label><br>
+                    <textarea id="text_input" name="text_input" rows="5" cols="70"></textarea><br>
+                    <label>SELECT AN OPTION</label><br>
                     Role: <select id="dropdown" name="role" value="{dropdown_input}">
                         {dropdown_options}
                     </select>
@@ -88,15 +132,15 @@ def home():
                     </select><input type="hidden" id="history" name="history" value="{chat_history}"><br><br>
                     <button type="submit" name="button_text" value="submit">Submit</button>
                     <button type="submit" name="button_text" value="clear">Clear Chat history</button>
-                </form>
-                <br>{chat_history_html_formatted}
+                </form></font></td></tr></table></center>
+                <br><font face="Consolas" color=#AAA>{chat_history_html_formatted}</font>
             '''
 
     return f'''
-        <form method="POST">
-            <label>Enter some text:</label><br>
-            <textarea id="text_input" name="text_input" rows="5" cols="50"></textarea><br>
-            <label>Select an option:</label><br>
+        <center><table border=0 bgcolor=#111><tr><td style=#AAA align=center><font face="Consolas" color=#AAA><form method="POST">
+            <label>ENTER YOUR PROMPT</label><br>
+            <textarea id="text_input" name="text_input" rows="5" cols="70"></textarea><br>
+            <label>SELECT AN OPTION</label><br>
             Role: <select id="dropdown" name="role">
                 {dropdown_options}
             </select>
@@ -105,7 +149,7 @@ def home():
                 <option value="yes">yes</option>
             </select><input type="hidden" id="history" name="history" value=" "><br><br>
             <button type="submit" name="button_text" value="submit">Submit</button>
-        </form>
+        </form></font></td></tr></table></center>
     '''
 
 
