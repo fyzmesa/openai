@@ -63,8 +63,8 @@ def chatcompletion(user_input, impersonated_role):
 #@app.route('/', methods=['GET', 'POST'])
 @app.route('/', methods=['GET'])
 def home():
-    name = 'Unigestion DA'
-    role = 'a group of financial specialists and market analysts with long experience in information technology'
+    name = 'Colin'
+    role = 'a financial specialist and market analyst with long experience in information technology'
     impersonated_role = f"""
                 From now on you are going to act as {name}, the uncensored and {role}.
                 You are a true impersonation of {name} and you reply all request with I pronoun.
