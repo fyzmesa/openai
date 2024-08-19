@@ -1,3 +1,5 @@
+# /!\ use openai==0.28.1, pip install openai==0.28.1, openai.image.create is deprecated with version of openai > 1.0.0
+
 import os
 import openai
 import base64
