@@ -4,52 +4,43 @@ import base64
 from datetime import datetime
 from IPython.display import Image
 from IPython import display
-from base64 import b64decode
 
 openai.api_key = ""
 
 ##############################################################################
 
-prompt = "A futuristic neon lit cyborg face"
+prompt = "Draw a logo for a house named Chatka. The logo should represent the roof of the house with smoke coming out of the chimney, at the bottom a central wooden window should be visible, and on the first floor a cooking pot should be the base of the house."
 
 ##############################################################################
 
-i = 1
+os.makedirs('outputs', exist_ok=True)
 
-while i < 4:
+# Number of images to generate
+
+num_images = 3
+
+for i in range(num_images):
     now = datetime.now()
     timestamp = now.strftime("%Y%m%d%H%M%S")
 
+    # Call the OpenAI API to generate an image
     response = openai.Image.create(
         prompt=prompt,
-        model="image-alpha-001",
-        size="512x512",
+        model="dall-e-3",  # Update to the latest model if necessary
+        size="1024x1024",
         response_format="b64_json"
-        )
+    )
 
+    # Decode the base64 image
     image_b64 = response['data'][0]['b64_json']
-
     imgdata = base64.b64decode(image_b64)
 
-    filename = 'outputs/%simage.jpg' %timestamp
-
+    # Save the image to a file
+    filename = f'outputs/{timestamp}_image.jpg'
     with open(filename, 'wb') as f:
         f.write(imgdata)
 
-    i += 1
+    # Optionally display the image in a Jupyter notebook
+    display.display(Image(filename=filename))
     
-# PROMPTS USED ###############################################################
 
-# a realistic photography of a crocodile wearing Louix XVI style outfits
-# a realistic photography of a panda wearing Samouraï style outfits
-# a realistic photography of a panda wearing Samouraï armors
-# a hand drawing of Mickey Mouse playing piano in a beautiful old fashion restaurant
-# a black and white hand drawing of Mickey Mouse playing piano in a beautiful old fashion restaurant
-# a realistic photography of a crocodile smiling and wearing cosmonauts outfits
-# a realistic photography of a female ballet dancer who's skin is made out of silver
-# a geometrical and symmetrical drawing of a marmote
-# a realistic photography of a young beautiful japanese woman
-# a banana wearing a suit standing inside an elevator
-# A futuristic neon lit cyborg face
-# A sea otter with a pearl earring by Johannes Vermeer
-# A photograph of a sunflower with sunglasses on in the middle of the flower in a field on a bright sunny day
